@@ -76,5 +76,8 @@ Exam_SOA/
 
 - DELETE /api/persons/{id} - Delete person
 
+### Example utilisé:
+- http://localhost:8080/Exam_SOA_V2/exercice/revision/api/persons/1
+
 # Lien GitHub:
 https://github.com/zShniter/Exam_SOA_V2
