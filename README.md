@@ -29,8 +29,6 @@ Exam_SOA/
 │ │ └── RestRouter.java
 │ ├── com.revision.entities/
 │ │ ├── Person.java
-│ │ ├── Client.java
-│ │ └── Commande.java
 │ ├── com.revision.service/
 │ │ ├── PersonService.java
 │ │ └── PersonServiceImpl.java
