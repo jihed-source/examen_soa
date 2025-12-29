@@ -79,3 +79,6 @@ Exam_SOA/
 
 # Lien GitHub:
 https://github.com/zShniter/Exam_SOA_V2
+
+# Lien Video:
+https://drive.google.com/file/d/1r5dHgbKcke0J6PqwmhUbovLPuDK_1Xi4/view?usp=drive_link
