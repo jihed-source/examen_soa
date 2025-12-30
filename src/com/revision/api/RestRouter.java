@@ -4,88 +4,71 @@ package com.revision.api;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.revision.entities.Person;
 import com.revision.service.PersonServiceImpl;
 
-@Path("/api")
+@RestController
+@RequestMapping("/exercice/revision/api")
 public class RestRouter {
-    
-    PersonServiceImpl personService = new PersonServiceImpl();
-    
-    // Person Endpoints
-    
-    @Path("/persons")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addPerson(Person person) {
+
+    @Autowired
+    private PersonServiceImpl personService;
+
+    @PostMapping("/persons")
+    public ResponseEntity<Map<String, String>> addPerson(@RequestBody Person person) {
         Map<String, String> result = personService.addPerson(person);
-        return Response.status(Response.Status.OK).entity(result).build();
+        return ResponseEntity.ok(result);
     }
-    
-    @Path("/persons/{id}")
-    @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response deletePerson(@PathParam("id") Long id) {
+
+    @DeleteMapping("/persons/{id}")
+    public ResponseEntity<?> deletePerson(@PathVariable Long id) {
         boolean result = personService.deletePerson(id);
         if (result) {
-            return Response.status(Response.Status.OK)
-                .entity("{\"status\":\"success\",\"message\":\"Person deleted successfully\"}")
-                .build();
+            return ResponseEntity.ok(Map.of("status", "success", "message", "Person deleted successfully"));
         } else {
-            return Response.status(Response.Status.NOT_FOUND)
-                .entity("{\"status\":\"error\",\"message\":\"Person not found\"}")
-                .build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("status", "error", "message", "Person not found"));
         }
     }
-    
-    @Path("/persons/{id}")
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePerson(@PathParam("id") Long id, Person person) {
+
+    @PutMapping("/persons/{id}")
+    public ResponseEntity<Map<String, String>> updatePerson(@PathVariable Long id, @RequestBody Person person) {
         Map<String, String> result = personService.updatePerson(id, person);
-        return Response.status(Response.Status.OK).entity(result).build();
+        return ResponseEntity.ok(result);
     }
-    
-    @Path("/persons/{id}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonById(@PathParam("id") Long id) {
+
+    @GetMapping("/persons/{id}")
+    public ResponseEntity<?> getPersonById(@PathVariable Long id) {
         Person person = personService.getPersonById(id);
         if (person != null) {
-            return Response.status(Response.Status.OK).entity(person).build();
+            return ResponseEntity.ok(person);
         } else {
-            return Response.status(Response.Status.NOT_FOUND)
-                .entity("{\"status\":\"error\",\"message\":\"Person not found\"}")
-                .build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("status", "error", "message", "Person not found"));
         }
     }
-    
-    @Path("/persons/search/{name}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonByName(@PathParam("name") String name) {
+
+    @GetMapping("/persons/search/{name}")
+    public ResponseEntity<List<Person>> getPersonByName(@PathVariable String name) {
         List<Person> persons = personService.getPersonByName(name);
-        return Response.status(Response.Status.OK).entity(persons).build();
+        return ResponseEntity.ok(persons);
     }
-    
-    @Path("/persons")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllPersons() {
+
+    @GetMapping("/persons")
+    public ResponseEntity<List<Person>> getAllPersons() {
         List<Person> persons = personService.getAllPersons();
-        return Response.status(Response.Status.OK).entity(persons).build();
+        return ResponseEntity.ok(persons);
     }
 }

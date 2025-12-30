@@ -58,7 +58,7 @@ Exam_SOA/
 ### Database Setup
 1. Create a MySQL database:
    ```sql
-   CREATE DATABASE revision_db;
+   CREATE DATABASE exam_soa_db;
 
 
 ## REST API Endpoints
@@ -74,11 +74,6 @@ Exam_SOA/
 
 - DELETE /api/persons/{id} - Delete person
 
-### Example utilisé:
-- http://localhost:8080/Exam_SOA_V2/exercice/revision/api/persons/1
 
-# Lien GitHub:
-https://github.com/zShniter/Exam_SOA_V2
 
-# Lien Video:
-https://drive.google.com/file/d/1r5dHgbKcke0J6PqwmhUbovLPuDK_1Xi4/view?usp=drive_link
+

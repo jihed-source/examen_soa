@@ -1,7 +1,6 @@
 // FILE: WebContent/js/app.js
-const API_BASE_URL = 'http://localhost:8080/Exam_SOA_V2/exercice/revision/api';
-
-// Show alert message
+// Base API URL — use global override if provided, otherwise a site-relative path
+const API_BASE_URL = "http://localhost:8080/Exam_SOA_V3/exercice/revision/api";// Show alert message
 function showAlert(message, type = 'info') {
     const alertContainer = document.getElementById('alert-container');
     const alert = document.createElement('div');
