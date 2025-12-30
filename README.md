@@ -1,5 +1,5 @@
 <!-- FILE: README.md -->
-# Person Management System - REST Frontend - By Ali Chniter & Nassim Laafif
+# Person Management System - REST Frontend - Jihed Bettaieb and Mohamed Lafi
 
 ## Project Description
 This is a frontend web application that consumes a RESTful backend API for managing persons. The application allows you to perform CRUD operations (Create, Read, Update, Delete) on person records through a modern, responsive web interface.
